@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { Button } from '@/components/ui/button'
+import { Button } from '../components/ui/button'
 
 interface NFT {
   id: string
@@ -11,6 +11,7 @@ interface NFT {
   network: string
   priceETH: string
   imageUrl: string
+  creator: string
   available: boolean
 }
 
@@ -52,7 +53,7 @@ function IndexComponent() {
 
   const updateFilter = (key: keyof NFTFilters, value: unknown) => {
     navigate({
-      search: (old) => ({
+      search: (old: Record<string, unknown>) => ({
         ...old,
         [key]: value || undefined,
         page: key === 'page' ? (value as number) : 1,
@@ -63,15 +64,41 @@ function IndexComponent() {
   const categories = ['Arte digital', 'Fotografia', 'Música', 'Arte 3D']
 
   return (
-    <div className="py-6 space-y-6 font-mono">
-      {/* Busca e Filtros */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+    <div className="space-y-12 font-mono">
+      {/* Hero Banner do Figma */}
+      <div className="bg-gradient-to-r from-stone-900 to-stone-950 border border-stone-800 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="space-y-4 max-w-xl">
+          <span className="text-xs font-bold text-[#FF9000] tracking-widest uppercase bg-[#FF9000]/10 px-3 py-1 rounded-full border border-[#FF9000]/20">
+            Marketplace Oficial
+          </span>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
+            Descubra e Colecione NFTs Exclusivos
+          </h1>
+          <p className="text-stone-400 text-sm leading-relaxed">
+            Compre, venda e explore ativos digitais autenticados na blockchain com taxas mínimas e entrega instantânea.
+          </p>
+        </div>
+        <div className="w-full md:w-72 h-64 bg-stone-800/50 rounded-xl border border-stone-700/50 overflow-hidden relative group">
+          <img
+            src="https://placehold.co/600x400/1e1e1e/FF9000?text=Bored+Ape+%234021"
+            alt="Destaque"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+            <p className="text-xs text-stone-300">Destaque da Semana</p>
+            <p className="font-bold text-white text-sm">Bored Ape #4021</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Barra de Busca e Filtros */}
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center pt-4">
         <input
           type="text"
-          placeholder="Buscar NFTs..."
+          placeholder="Buscar por nome ou criador..."
           value={searchParams.search || ''}
           onChange={(e) => updateFilter('search', e.target.value)}
-          className="bg-stone-900 border border-stone-800 rounded px-4 py-2 text-white w-full md:w-80 focus:outline-none focus:border-[#FF9000]"
+          className="bg-stone-900 border border-stone-800 rounded-lg px-4 py-2.5 text-white w-full md:w-80 focus:outline-none focus:border-[#FF9000] text-sm"
         />
 
         <div className="flex flex-wrap gap-2">
@@ -82,10 +109,10 @@ function IndexComponent() {
               onClick={() =>
                 updateFilter('category', searchParams.category === cat ? undefined : cat)
               }
-              className={`text-xs ${
+              className={`text-xs px-4 py-2 ${
                 searchParams.category === cat
                   ? 'bg-[#FF9000] text-black font-bold'
-                  : 'border-stone-800 text-stone-300'
+                  : 'border-stone-800 text-stone-300 hover:border-[#FF9000]/50'
               }`}
             >
               {cat}
@@ -94,22 +121,22 @@ function IndexComponent() {
         </div>
       </div>
 
-      {/* Grid de NFTs com Link para Detalhes */}
+      {/* Grid de 4 Colunas (Alinhado ao Figma Desktop) */}
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((n) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((n) => (
             <div
               key={n}
-              className="h-72 bg-stone-900 rounded animate-pulse border border-stone-800"
+              className="h-80 bg-stone-900 rounded-xl animate-pulse border border-stone-800"
             />
           ))}
         </div>
       ) : data?.items.length === 0 ? (
-        <div className="text-center py-12 text-stone-400">
-          Nenhum NFT encontrado com esses filtros.
+        <div className="text-center py-16 text-stone-400 bg-stone-900/40 border border-stone-800 rounded-xl">
+          Nenhum NFT encontrado para os filtros selecionados.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {data?.items.map((nft) => (
             <Link
               key={nft.id}
@@ -117,20 +144,25 @@ function IndexComponent() {
               params={{ id: nft.id }}
               className="block group"
             >
-              <div className="bg-stone-900 border border-stone-800 rounded-lg overflow-hidden flex flex-col justify-between hover:border-[#FF9000]/50 transition-colors">
-                <img
-                  src={nft.imageUrl}
-                  alt={nft.name}
-                  className="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="p-4 space-y-2">
-                  <span className="text-xs text-amber-500">{nft.network}</span>
-                  <h3 className="font-bold text-lg text-white group-hover:text-[#FF9000] transition-colors">
+              <div className="bg-stone-900 border border-stone-800 rounded-xl overflow-hidden flex flex-col justify-between hover:border-[#FF9000] transition-all duration-300 hover:shadow-lg hover:shadow-[#FF9000]/10">
+                <div className="h-52 w-full overflow-hidden bg-stone-950">
+                  <img
+                    src={nft.imageUrl}
+                    alt={nft.name}
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4 space-y-3">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-amber-500 font-bold">{nft.network}</span>
+                    <span className="text-stone-500">{nft.creator}</span>
+                  </div>
+                  <h3 className="font-bold text-base text-white group-hover:text-[#FF9000] transition-colors truncate">
                     {nft.name}
                   </h3>
-                  <div className="flex justify-between items-center pt-2 border-t border-stone-800">
+                  <div className="flex justify-between items-center pt-3 border-t border-stone-800">
                     <span className="text-xs text-stone-400">Preço</span>
-                    <span className="text-[#FF9000] font-bold">
+                    <span className="text-[#FF9000] font-bold text-sm">
                       {nft.priceETH} ETH
                     </span>
                   </div>

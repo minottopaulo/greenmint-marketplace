@@ -7,8 +7,8 @@ export interface User {
   email: string
   avatar: string
   walletAddress: string
-  balanceETH: string // Sempre string decimal para preservar precisão
-  favorites: string[] // IDs dos NFTs
+  balanceETH: string
+  favorites: string[]
 }
 
 export interface NFT {
@@ -18,7 +18,7 @@ export interface NFT {
   category: 'Arte digital' | 'Fotografia' | 'Música' | 'Arte 3D' | 'Colecionáveis' | 'Generativa' | 'Jogos' | 'Assinaturas' | 'Utilidade'
   network: 'Ethereum' | 'Polygon' | 'Solana'
   edition: '1/1' | '1/10' | '1/50'
-  priceETH: string // ex: "2.45"
+  priceETH: string
   imageUrl: string
   creator: string
   owner: string
@@ -31,7 +31,6 @@ export interface CartItem {
   quantity: number
 }
 
-// 1. Fixtures Iniciais Exigidas no Teste
 const INITIAL_USERS: User[] = [
   {
     id: 'user-1',
@@ -64,7 +63,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Ethereum',
     edition: '1/1',
     priceETH: '1.8500',
-    imageUrl: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=500',
+    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Bored+Ape+%234021',
     creator: 'YugaLabs',
     owner: '0x71C...39A2',
     description: 'Um colecionável único da série Bored Ape Yacht Club.',
@@ -78,7 +77,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Polygon',
     edition: '1/10',
     priceETH: '0.4500',
-    imageUrl: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500',
+    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Cyber+Punk+%232077',
     creator: 'NeonArt',
     owner: '0x32B...99F1',
     description: 'Ilustração 3D em estilo cyberpunk com iluminação neon.',
@@ -92,7 +91,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Solana',
     edition: '1/50',
     priceETH: '0.1200',
-    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500',
+    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Acoustic+Soul+%2305',
     creator: 'AudioLab',
     owner: '0x71C...39A2',
     description: 'Faixa exclusiva em áudio de alta fidelidade ligada a este token.',
@@ -100,7 +99,6 @@ const INITIAL_NFTS: NFT[] = [
   },
 ]
 
-// 2. Chaves de Armazenamento
 const STORAGE_KEYS = {
   USERS: 'greenmint_db_users',
   NFTS: 'greenmint_db_nfts',
@@ -108,7 +106,6 @@ const STORAGE_KEYS = {
   AUTH: 'greenmint_db_auth',
 }
 
-// 3. Métodos de Leitura e Escrita Persistentes
 export const db = {
   getUsers(): User[] {
     const data = localStorage.getItem(STORAGE_KEYS.USERS)
@@ -145,7 +142,5 @@ export const db = {
   },
 }
 
-// Inicializa o banco com os dados padrão se estiver vazio
-if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
-  db.reset()
-}
+// Força o reset inicial para carregar as novas capas
+db.reset()
