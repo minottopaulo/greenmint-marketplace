@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",
-    "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.105.0",
     "@tanstack/react-router": "1.170.46",
     "@tanstack/router-plugin": "1.168.48",
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@mswjs/socket.io-binding": "^0.2.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
