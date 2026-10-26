@@ -1,28 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
+    "lib": ["ES2022"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["vite/client"],
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting e Regras Estritas */
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-
-    /* Path Aliases */
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "noUnusedLocals": true
   },
-  "include": ["src"]
+  "include": ["vite.config.ts"]
 }
