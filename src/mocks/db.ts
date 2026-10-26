@@ -1,4 +1,4 @@
-// src/mocks/db.ts
+
 
 export interface User {
   id: string
@@ -43,16 +43,19 @@ const INITIAL_USERS: User[] = [
     favorites: ['nft-1'],
   },
   {
-    id: 'user-2',
-    name: 'Ada Lovelace',
-    username: '@ada_nft',
-    email: 'ada@greenmint.io',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-    walletAddress: '0x32B...99F1',
-    balanceETH: '3.1200',
-    favorites: [],
-  },
+      id: 'user-2',
+      name: 'Ada Lovelace',
+      username: '@ada_nft',
+      email: 'ada@greenmint.io',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+      walletAddress: '0x32B...99F1',
+      balanceETH: '3.1200',
+      favorites: [],
+    },
 ]
+
+const makeSvg = (title: string, color = '#FF9000') =>
+  `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="100%" height="100%" fill="%231E1916"/><circle cx="300" cy="170" r="80" fill="%232A221E"/><text x="50%" y="330" font-family="monospace" font-weight="bold" font-size="28" fill="${encodeURIComponent(color)}" text-anchor="middle">${encodeURIComponent(title)}</text></svg>`
 
 const INITIAL_NFTS: NFT[] = [
   {
@@ -141,6 +144,4 @@ export const db = {
     localStorage.removeItem(STORAGE_KEYS.AUTH)
   },
 }
-
-// Força o reset inicial para carregar as novas capas
 db.reset()
