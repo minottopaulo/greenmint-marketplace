@@ -1,5 +1,3 @@
-
-
 export interface User {
   id: string
   name: string
@@ -31,31 +29,32 @@ export interface CartItem {
   quantity: number
 }
 
+// Helper para gerar imagens SVG limpas com ícones/siglas centralizadas
+const makeSvg = (initials: string, color = '#FF9000', bgColor = '%231E1916') =>
+  `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="100%" height="100%" fill="${bgColor}"/><circle cx="300" cy="200" r="70" fill="%232A221E" stroke="${encodeURIComponent(color)}" stroke-width="4"/><text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="36" fill="${encodeURIComponent(color)}">${encodeURIComponent(initials)}</text></svg>`
+
 const INITIAL_USERS: User[] = [
   {
     id: 'user-1',
     name: 'Satoshi Nakamoto',
     username: '@satoshi',
     email: 'satoshi@greenmint.io',
-    avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150',
+    avatar: makeSvg('SN', '#FF9000', '%232A1808'),
     walletAddress: '0x71C...39A2',
     balanceETH: '12.5000',
     favorites: ['nft-1'],
   },
   {
-      id: 'user-2',
-      name: 'Ada Lovelace',
-      username: '@ada_nft',
-      email: 'ada@greenmint.io',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-      walletAddress: '0x32B...99F1',
-      balanceETH: '3.1200',
-      favorites: [],
-    },
+    id: 'user-2',
+    name: 'Ada Lovelace',
+    username: '@ada_nft',
+    email: 'ada@greenmint.io',
+    avatar: makeSvg('AL', '#8A2BE2', '%23140D0A'),
+    walletAddress: '0x32B...99F1',
+    balanceETH: '3.1200',
+    favorites: [],
+  },
 ]
-
-const makeSvg = (title: string, color = '#FF9000') =>
-  `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="100%" height="100%" fill="%231E1916"/><circle cx="300" cy="170" r="80" fill="%232A221E"/><text x="50%" y="330" font-family="monospace" font-weight="bold" font-size="28" fill="${encodeURIComponent(color)}" text-anchor="middle">${encodeURIComponent(title)}</text></svg>`
 
 const INITIAL_NFTS: NFT[] = [
   {
@@ -66,7 +65,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Ethereum',
     edition: '1/1',
     priceETH: '1.8500',
-    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Bored+Ape+%234021',
+    imageUrl: makeSvg('BAYC', '#FF9000', '%231E1916'),
     creator: 'YugaLabs',
     owner: '0x71C...39A2',
     description: 'Um colecionável único da série Bored Ape Yacht Club.',
@@ -80,7 +79,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Polygon',
     edition: '1/10',
     priceETH: '0.4500',
-    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Cyber+Punk+%232077',
+    imageUrl: makeSvg('CP', '#00F5D4', '%230A192F'),
     creator: 'NeonArt',
     owner: '0x32B...99F1',
     description: 'Ilustração 3D em estilo cyberpunk com iluminação neon.',
@@ -94,7 +93,7 @@ const INITIAL_NFTS: NFT[] = [
     network: 'Solana',
     edition: '1/50',
     priceETH: '0.1200',
-    imageUrl: 'https://placehold.co/600x400/1e1e1e/FF9000?text=Acoustic+Soul+%2305',
+    imageUrl: makeSvg('AS', '#E07D00', '%23251508'),
     creator: 'AudioLab',
     owner: '0x71C...39A2',
     description: 'Faixa exclusiva em áudio de alta fidelidade ligada a este token.',
@@ -144,4 +143,6 @@ export const db = {
     localStorage.removeItem(STORAGE_KEYS.AUTH)
   },
 }
-db.reset()
+
+// Reseta o localStorage para carregar os novos SVGs limpos
+db.reset()  

@@ -69,7 +69,7 @@ function RootComponent() {
         <Outlet />
       </main>
 
-      {/* Bottom Navigation Bar Mobile (Figma) */}
+      {/* Bottom Navigation Bar Mobile (Exclusiva para telemóveis - Figma) */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 bg-[#140D0A]/95 border-t border-stone-800/90 backdrop-blur-md z-50 px-6 py-2.5 flex justify-between items-center text-[10px] text-stone-400">
         <Link to="/" className="flex flex-col items-center gap-1 [&.active]:text-[#FF9000]">
           <span className="text-base">🏠</span>
