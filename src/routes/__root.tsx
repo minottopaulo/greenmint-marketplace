@@ -38,7 +38,7 @@ function RootComponent() {
 
   return (
     <div className="min-h-screen bg-[#140D0A] text-white font-mono flex flex-col justify-between pb-16 md:pb-0">
-      {/* Header */}
+      {/* Header Fiel ao Figma */}
       <header className="border-b border-stone-800/80 bg-[#140D0A]/95 sticky top-0 z-40 px-4 md:px-6 py-4">
         <div className="max-w-[1440px] mx-auto flex justify-between items-center">
           <Link to="/" className="text-xl font-black tracking-widest text-white">
@@ -79,7 +79,7 @@ function RootComponent() {
         <Outlet />
       </main>
 
-      {/* Bottom Navigation Bar Mobile */}
+      {/* Bottom Navigation Bar Mobile (Figma) */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 bg-[#140D0A]/95 border-t border-stone-800/90 backdrop-blur-md z-50 px-6 py-2.5 flex justify-between items-center text-[10px] text-stone-400">
         <Link to="/" className="flex flex-col items-center gap-1 [&.active]:text-[#FF9000]">
           <span className="text-base">🏠</span>
@@ -98,33 +98,35 @@ function RootComponent() {
             </span>
           )}
         </Link>
-        <button onClick={() => setIsAuthOpen(true)} className="flex flex-col items-center gap-1">
+        <Link to="/profile" className="flex flex-col items-center gap-1 [&.active]:text-[#FF9000]">
           <span className="text-base">👤</span>
           <span>Perfil</span>
-        </button>
+        </Link>
       </nav>
 
-      {/* Footer com Newsletter */}
-      <footer className="border-t border-stone-800/80 bg-[#0D0806] pt-12 pb-8 mt-16 text-xs">
-        <div className="max-w-[1200px] mx-auto px-6 space-y-12">
+      {/* Footer Completo com Brand Band do Figma */}
+      <footer className="border-t border-stone-800/80 bg-[#0D0806] pt-12 pb-8 mt-16 text-xs font-mono">
+        <div className="max-w-[1200px] mx-auto px-6 space-y-8">
+          
+          {/* Topo: Medalhões + Newsletter */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-2">
-              <div className="w-6 h-6 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded">W</div>
+              <div className="w-7 h-7 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded text-xs">W</div>
               <h4 className="font-bold text-white">Segurança da carteira</h4>
-              <p className="text-stone-400 text-[11px]">Proteja sua carteira e colecione arte digital verificada com confiança.</p>
+              <p className="text-stone-400 text-[11px] leading-relaxed">Proteja sua carteira e colecione arte digital verificada com confiança.</p>
             </div>
             <div className="space-y-2">
-              <div className="w-6 h-6 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded">C</div>
+              <div className="w-7 h-7 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded text-xs">C</div>
               <h4 className="font-bold text-white">Criadores em destaque</h4>
-              <p className="text-stone-400 text-[11px]">Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.</p>
+              <p className="text-stone-400 text-[11px] leading-relaxed">Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.</p>
             </div>
             <div className="space-y-2">
-              <div className="w-6 h-6 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded">D</div>
+              <div className="w-7 h-7 bg-[#FF9000] text-black font-bold flex items-center justify-center rounded text-xs">D</div>
               <h4 className="font-bold text-white">Alertas de lançamentos</h4>
-              <p className="text-stone-400 text-[11px]">Receba calendários de cunhagem, novidades de listas de acesso e análises.</p>
+              <p className="text-stone-400 text-[11px] leading-relaxed">Receba calendários de cunhagem, novidades de listas de acesso e análises.</p>
             </div>
 
-            {/* Caixa de Inscrição da Newsletter */}
+            {/* Newsletter */}
             <div className="bg-stone-900/40 border border-stone-800/80 p-4 rounded-xl space-y-3">
               <h4 className="font-bold text-white">Antecipe-se ao próximo lançamento</h4>
               {subscribed ? (
@@ -147,6 +149,55 @@ function RootComponent() {
                   </button>
                 </form>
               )}
+            </div>
+          </div>
+
+          {/* Faixa Intermédia da Marca (Brand Band do Figma) */}
+          <div className="bg-stone-900/60 border-y border-stone-800/80 py-4 px-6 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4 text-stone-400 text-[11px]">
+            <span className="font-bold text-white">KURIO</span>
+            <span>Feito para colecionadores, criadores e cultura</span>
+            <div className="flex gap-6">
+              <span>contato@email.com</span>
+              <span>+55 11 4002 8922</span>
+            </div>
+          </div>
+
+          {/* Links Inferiores */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-[11px] pt-4">
+            <div className="space-y-2">
+              <h5 className="font-bold text-white uppercase text-[10px] tracking-wider">Meu perfil</h5>
+              <ul className="space-y-1 text-stone-400">
+                <li className="hover:text-white cursor-pointer"><Link to="/profile">Meu perfil</Link></li>
+                <li className="hover:text-white cursor-pointer">Minha coleção</li>
+                <li className="hover:text-white cursor-pointer">Atividade</li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <h5 className="font-bold text-white uppercase text-[10px] tracking-wider">Central de ajuda</h5>
+              <ul className="space-y-1 text-stone-400">
+                <li className="hover:text-white cursor-pointer">Central de ajuda</li>
+                <li className="hover:text-white cursor-pointer">Como comprar NFTs</li>
+                <li className="hover:text-white cursor-pointer">Carteira e segurança</li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <h5 className="font-bold text-white uppercase text-[10px] tracking-wider">Coleções</h5>
+              <ul className="space-y-1 text-stone-400">
+                <li className="hover:text-white cursor-pointer">Arte digital</li>
+                <li className="hover:text-white cursor-pointer">Fotografia</li>
+                <li className="hover:text-white cursor-pointer">Música</li>
+              </ul>
+            </div>
+
+            <div className="space-y-3">
+              <h5 className="font-bold text-white uppercase text-[10px] tracking-wider">Carteiras compatíveis</h5>
+              <div className="flex gap-2">
+                <span className="bg-stone-900 border border-stone-800 px-2 py-1 rounded text-[9px] text-stone-400">METAMASK</span>
+                <span className="bg-stone-900 border border-stone-800 px-2 py-1 rounded text-[9px] text-stone-400">WALLETCONNECT</span>
+                <span className="bg-stone-900 border border-stone-800 px-2 py-1 rounded text-[9px] text-stone-400">COINBASE</span>
+              </div>
             </div>
           </div>
 
